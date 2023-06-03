@@ -6,53 +6,6 @@ class Disp_Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-<<<<<<< HEAD
-    return MaterialApp(
-      title: 'Flutter Memo',
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('表示'),
-        ),
-        body: Column(
-          children: [
-            Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Align(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/edit');
-                    },
-                    child: Text(
-                      '編集',
-                      style: TextStyle(
-                          fontSize: 32.0,
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent,
-                      elevation: 0,
-                    ),
-                  ),
-                  alignment: Alignment.centerRight,
-                ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: Text(
-                'Memo_Title',
-                style: TextStyle(fontSize: 30.0),
-              ),
-            ),
-            Text(
-              'Memo_Value',
-              style: TextStyle(fontSize: 30.0),
-            ),
-          ],
-        ),
-=======
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -81,7 +34,6 @@ class Disp_Screen extends ConsumerWidget {
             style: TextStyle(fontSize: 30.0),
           ),
         ],
->>>>>>> v1/shinta/ui
       ),
     );
   }

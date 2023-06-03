@@ -9,51 +9,6 @@ class Add_Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-<<<<<<< HEAD
-    return MaterialApp(
-      title: 'Flutter Memo',
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('追加'),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              Text(
-                'Title',
-                style: TextStyle(fontSize: 30.0),
-              ),
-              TextField(
-                controller: _controller_title,
-                style: TextStyle(fontSize: 30.0),
-              ),
-              Text(
-                'Memo',
-                style: TextStyle(fontSize: 30.0),
-              ),
-              TextField(
-                controller: _controller_Memo,
-                style: TextStyle(fontSize: 30.0),
-                maxLines: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      showDialog<void>(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (_) {
-                            return Alert();
-                          });
-                    },
-                    child: Text(
-                      '破棄',
-                      style: TextStyle(fontSize: 32.0, color: Colors.white),
-                    ),
-=======
     final _controller = ref.read(AddProvider.notifier);
     return Scaffold(
       appBar: AppBar(
@@ -93,7 +48,6 @@ class Add_Screen extends ConsumerWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red, // background
                     foregroundColor: Colors.white, // foreground
->>>>>>> v1/shinta/ui
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/');
