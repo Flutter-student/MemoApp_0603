@@ -39,8 +39,12 @@ class Edit_Screen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/');
+                    onPressed: () {showDialog<void>(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (_) {
+                          return Alert();
+                        });
                     },
                     child: Text(
                       '削除',
@@ -62,6 +66,32 @@ class Edit_Screen extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class Alert extends StatelessWidget {
+  const Alert({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('本当に削除しますか？'),
+      content: Text('削除すると復元できません'),
+      actions: <Widget>[
+        ElevatedButton(
+          child: Text('破棄'),
+          onPressed: () {
+            Navigator.pushNamed(context, '/');
+          },
+        ),
+        ElevatedButton(
+          child: Text('キャンセル'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        )
+      ],
     );
   }
 }

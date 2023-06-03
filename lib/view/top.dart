@@ -17,13 +17,16 @@ class Top_Screen extends ConsumerWidget {
           child: Column(
             children: [
               for (var i = 0; i < 3; i++) ...{
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/disp');
-                  },
-                  child: Text(
-                    'This is Test',
-                    style: TextStyle(fontSize: 32.0, color: Colors.white),
+                Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/disp');
+                    },
+                    child: Text(
+                      'This is Test',
+                      style: TextStyle(fontSize: 32.0, color: Colors.white),
+                    ),
                   ),
                 ),
               },

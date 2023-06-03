@@ -15,21 +15,35 @@ class Disp_Screen extends ConsumerWidget {
         ),
         body: Column(
           children: [
-            Align(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/edit');
-                },
-                child: Text(
-                  '編集',
-                  style: TextStyle(fontSize: 32.0, color: Colors.white),
+            Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Align(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/edit');
+                    },
+                    child: Text(
+                      '編集',
+                      style: TextStyle(
+                          fontSize: 32.0,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.transparent,
+                      elevation: 0,
+                    ),
+                  ),
+                  alignment: Alignment.centerRight,
                 ),
-              ),
-              alignment: Alignment.centerRight,
             ),
-            Text(
-              'Memo_Title',
-              style: TextStyle(fontSize: 30.0),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20.0),
+              child: Text(
+                'Memo_Title',
+                style: TextStyle(fontSize: 30.0),
+              ),
             ),
             Text(
               'Memo_Value',
