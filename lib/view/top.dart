@@ -11,7 +11,7 @@ class Top_Screen extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Good evening!!!'),
+          title: Text('メモアプリ'),
         ),
         body: Center(
           child: Column(
@@ -27,12 +27,14 @@ class Top_Screen extends StatelessWidget {
                   ),
                 ),
               },
-              Text(
-                'Top_Screen',
-                style: TextStyle(fontSize: 30.0),
-              ),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.pushNamed(context, '/add');
+          },
+          child: Icon (Icons.add),
         ),
       ),
     );

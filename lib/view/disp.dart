@@ -11,20 +11,23 @@ class Disp_Screen extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Memo'),
+          title: Text('表示'),
         ),
-        body: Center(
-          child: Column(
+        body:
+        Column(
             children: [
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, '/edit');
-                  },
-                  child: Text(
-                    '編集',
-                    style: TextStyle(fontSize: 32.0, color: Colors.white),
+              Align(
+                child: ElevatedButton(
+                    onPressed: (){
+                      Navigator.pushNamed(context, '/edit');
+                    },
+                    child: Text(
+                      '編集',
+                      style: TextStyle(fontSize: 32.0, color: Colors.white),
+                    ),
                   ),
-                ),
+                alignment: Alignment.centerRight,
+              ),
               Text(
                 'Memo_Title',
                 style: TextStyle(fontSize: 30.0),
@@ -36,7 +39,6 @@ class Disp_Screen extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 }
