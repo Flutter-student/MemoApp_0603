@@ -7,6 +7,5 @@ class MomoModel with _$MomoModel {
   factory MomoModel({
     required String title,
     required String memo,
-    required DateTime createAt,
   }) = _MomoModel;
 }

@@ -3,43 +3,60 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
+  //------------------------------------------------------------
+  //　初期化処理
+  //############################################
   //DBを開く（なければ作成する）
+  //############################################
   @override
-  Future<Database> getDatabase() async {
-    final path = await getDbPath();
-    final db = await openDatabase(path, version: 1,
-        onCreate: (Database database, int version) async {
-      await database.execute(_createDatabaseQuery);
-    });
-    var table = await db.query(_tableName);
-    table.forEach(print);
-
-    return db;
+  Future<void> getDatabase() async {
+    Exception? error;
+    try {
+      await getDbPath();
+      final _db = await openDatabase(_path, version: _databaseVersion,
+          onCreate: (Database database, int version) async {
+        await database.execute(_createDatabaseQuery);
+      });
+      _database = _db;
+    } on Exception catch (e) {
+      error = e;
+      print("エラー発生：${error}");
+    }
+    // Console
+    var _table = await _database.query(_tableName);
+    _table.forEach(print);
   }
 
   //############################################
-  //OS毎にファイルを分けないやり方。パスの取得
+  //パスの取得
   //############################################
   @override
-  Future<String> getDbPath() async {
-    final dbDirectory = await getApplicationSupportDirectory();
-    final dbFilePath = dbDirectory.path;
-    final path = join(dbFilePath, _databaseName);
-    print("FilePath:" + path);
-    return path;
+  Future<void> getDbPath() async {
+    Exception? error;
+    try {
+      final _dbDirectory = await getApplicationSupportDirectory();
+      final _dbFilePath = _dbDirectory.path;
+      final _rootPath = join(_dbFilePath, _databaseName);
+      _path = _rootPath;
+    } on Exception catch (e) {
+      error = e;
+      print("エラー発生：${error}");
+    }
+
+    // Console
+    print("FilePath:" + _path);
   }
+  // 初期化完了
+  //------------------------------------------------------------
 
   //############################################
   //データ追加
   //############################################
   @override
-  Future<bool> insertData() async {
+  Future<bool> insertData(Map<String, dynamic> value) async {
     Exception? error;
-    var value = {'title': "test01", 'memo': "shintaのテスト"};
     try {
-      final db = await getDatabase();
-
-      int id = await db.insert(
+      await _database.insert(
         _tableName,
         value,
         conflictAlgorithm: ConflictAlgorithm.replace,
@@ -57,16 +74,21 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
 }
 
 class _DatabaseInfo {
-  final String _databaseName = "sample.db";
-  final String _tableName = "sample_table";
+  final String _databaseName = "MemoApp.db";
+  final int _databaseVersion = 1;
+  final String _tableName = "memo_table";
   final String _createDatabaseQuery =
-      'CREATE TABLE sample_table (id INT PRIMARY KEY NOT NULL,title VARCHAR(255),memo TEXT);';
+      'CREATE TABLE memo_table (id INT PRIMARY KEY NOT NULL,title VARCHAR(255),memo TEXT);';
+
+  /// 取得DB情報保持
+  late final Database _database;
+  late final String _path;
 }
 
 //Interfase
 //Internal Method
 abstract class _DatabaseInterfase {
-  Future<Database> getDatabase();
-  Future<String> getDbPath();
-  Future<bool> insertData();
+  Future<void> getDatabase();
+  Future<void> getDbPath();
+  Future<bool> insertData(Map<String, dynamic> value);
 }

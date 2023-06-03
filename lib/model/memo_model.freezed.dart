@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MomoModel {
   String get title => throw _privateConstructorUsedError;
   String get memo => throw _privateConstructorUsedError;
-  DateTime get createAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MomoModelCopyWith<MomoModel> get copyWith =>
@@ -30,7 +29,7 @@ abstract class $MomoModelCopyWith<$Res> {
   factory $MomoModelCopyWith(MomoModel value, $Res Function(MomoModel) then) =
       _$MomoModelCopyWithImpl<$Res, MomoModel>;
   @useResult
-  $Res call({String title, String memo, DateTime createAt});
+  $Res call({String title, String memo});
 }
 
 /// @nodoc
@@ -48,7 +47,6 @@ class _$MomoModelCopyWithImpl<$Res, $Val extends MomoModel>
   $Res call({
     Object? title = null,
     Object? memo = null,
-    Object? createAt = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -59,10 +57,6 @@ class _$MomoModelCopyWithImpl<$Res, $Val extends MomoModel>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 }
@@ -74,7 +68,7 @@ abstract class _$$_MomoModelCopyWith<$Res> implements $MomoModelCopyWith<$Res> {
       __$$_MomoModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String memo, DateTime createAt});
+  $Res call({String title, String memo});
 }
 
 /// @nodoc
@@ -90,7 +84,6 @@ class __$$_MomoModelCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? memo = null,
-    Object? createAt = null,
   }) {
     return _then(_$_MomoModel(
       title: null == title
@@ -101,10 +94,6 @@ class __$$_MomoModelCopyWithImpl<$Res>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -112,19 +101,16 @@ class __$$_MomoModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MomoModel implements _MomoModel {
-  _$_MomoModel(
-      {required this.title, required this.memo, required this.createAt});
+  _$_MomoModel({required this.title, required this.memo});
 
   @override
   final String title;
   @override
   final String memo;
-  @override
-  final DateTime createAt;
 
   @override
   String toString() {
-    return 'MomoModel(title: $title, memo: $memo, createAt: $createAt)';
+    return 'MomoModel(title: $title, memo: $memo)';
   }
 
   @override
@@ -133,13 +119,11 @@ class _$_MomoModel implements _MomoModel {
         (other.runtimeType == runtimeType &&
             other is _$_MomoModel &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.memo, memo) || other.memo == memo) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt));
+            (identical(other.memo, memo) || other.memo == memo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, memo, createAt);
+  int get hashCode => Object.hash(runtimeType, title, memo);
 
   @JsonKey(ignore: true)
   @override
@@ -150,16 +134,12 @@ class _$_MomoModel implements _MomoModel {
 
 abstract class _MomoModel implements MomoModel {
   factory _MomoModel(
-      {required final String title,
-      required final String memo,
-      required final DateTime createAt}) = _$_MomoModel;
+      {required final String title, required final String memo}) = _$_MomoModel;
 
   @override
   String get title;
   @override
   String get memo;
-  @override
-  DateTime get createAt;
   @override
   @JsonKey(ignore: true)
   _$$_MomoModelCopyWith<_$_MomoModel> get copyWith =>
