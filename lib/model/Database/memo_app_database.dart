@@ -120,22 +120,6 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
       print("エラー発生：${error}");
     }
   }
-
-  @override
-  Future<void> getAllData() async {
-    Exception? error;
-    try {
-      // var _allData = await _database.query(_tableName);
-    } on Exception catch (e) {
-      error = e;
-      print("エラー発生：${error}");
-    }
-    // Console
-    print("-----データベース-----");
-    var _table = await _database.query(_tableName);
-    _table.forEach(print);
-    print("====================");
-  }
 }
 
 class _DatabaseInfo {
@@ -157,5 +141,4 @@ abstract class _DatabaseInterfase {
   Future<void> getDbPath();
   Future<bool> insertData(Map<String, dynamic> value);
   Future<void> deleteData(int id);
-  Future<void> getAllData();
 }

@@ -6,37 +6,34 @@ class Disp_Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      title: 'Flutter Memo',
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('表示'),
-        ),
-        body: Column(
-          children: [
-            Align(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/edit');
-                },
-                child: Text(
-                  '編集',
-                  style: TextStyle(fontSize: 32.0, color: Colors.white),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('表示'),
+      ),
+      body: Column(
+        children: [
+          Align(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/edit');
+              },
+              child: Text(
+                '編集',
+                style: TextStyle(fontSize: 32.0, color: Colors.white),
               ),
-              alignment: Alignment.centerRight,
             ),
-            Text(
-              'Memo_Title',
-              style: TextStyle(fontSize: 30.0),
-            ),
-            Text(
-              'Memo_Value',
-              style: TextStyle(fontSize: 30.0),
-            ),
-          ],
-        ),
+            alignment: Alignment.centerRight,
+          ),
+          Text(
+            'Memo_Title',
+            style: TextStyle(fontSize: 30.0),
+          ),
+          Text(
+            'Memo_Value',
+            style: TextStyle(fontSize: 30.0),
+          ),
+        ],
       ),
     );
   }

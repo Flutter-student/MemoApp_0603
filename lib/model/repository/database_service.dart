@@ -40,6 +40,8 @@ class DatabaseNotifier extends StateNotifier<DatabaseState> {
       } else {
         print("state内:null");
       }
+      //初期化完了
+      state = DatabaseStateInitialized(memoList: state.memoList);
     } on Exception catch (e) {
       error = e;
     } finally {
@@ -49,7 +51,7 @@ class DatabaseNotifier extends StateNotifier<DatabaseState> {
     }
   }
 
-  Future<bool> AddMemoDatabase(String title, String memo) async {
+  Future<bool> addMemoDatabase(String title, String memo) async {
     Exception? error;
     bool result = false;
     try {
@@ -60,6 +62,8 @@ class DatabaseNotifier extends StateNotifier<DatabaseState> {
 
       result = await MemoAppDatabase().insertData(memo_daital);
 
+      refreshStateData();
+
       //初期化完了
       state = DatabaseStateInitialized(memoList: state.memoList);
     } on Exception catch (e) {
@@ -69,6 +73,35 @@ class DatabaseNotifier extends StateNotifier<DatabaseState> {
         throw error;
       }
       return result;
+    }
+  }
+
+  Future<void> refreshStateData() async {
+    Exception? error;
+    try {
+      List<MomoModel> array = [];
+      var _result = await MemoAppDatabase().getDatabase();
+      if (_result == null) {
+        return;
+      }
+
+      _result.forEach((element) {
+        MomoModel memodaital = MomoModel(
+            title: element['title'].toString(),
+            memo: element['memo'].toString());
+        array.add(memodaital);
+      });
+      state = DatabaseStateInitializing(memoList: array);
+
+      if (state.memoList != null) {
+        state.memoList!.forEach((element) {
+          print("state内:${element}");
+        });
+      } else {
+        print("state内:null");
+      }
+    } on Exception catch (e) {
+      error = e;
     }
   }
 }

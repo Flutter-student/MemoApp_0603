@@ -10,69 +10,66 @@ class Add_Screen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.read(AddProvider.notifier);
-    return MaterialApp(
-      title: 'Flutter Memo',
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('追加'),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              Text(
-                'Title',
-                style: TextStyle(fontSize: 30.0),
-              ),
-              TextField(
-                controller: _controller_title,
-                style: TextStyle(fontSize: 30.0),
-                onChanged: (String value) {
-                  _controller.InputTitle(value);
-                },
-              ),
-              Text(
-                'Memo',
-                style: TextStyle(fontSize: 30.0),
-              ),
-              TextField(
-                controller: _controller_Memo,
-                style: TextStyle(fontSize: 30.0),
-                onChanged: (String value) {
-                  _controller.InputMemo(value);
-                },
-                maxLines: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red, // background
-                      foregroundColor: Colors.white, // foreground
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/');
-                    },
-                    child: Text(
-                      '破棄',
-                      style: TextStyle(fontSize: 32.0, color: Colors.white),
-                    ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('追加'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Text(
+              'Title',
+              style: TextStyle(fontSize: 30.0),
+            ),
+            TextField(
+              controller: _controller_title,
+              style: TextStyle(fontSize: 30.0),
+              onChanged: (String value) {
+                _controller.InputTitle(value);
+              },
+            ),
+            Text(
+              'Memo',
+              style: TextStyle(fontSize: 30.0),
+            ),
+            TextField(
+              controller: _controller_Memo,
+              style: TextStyle(fontSize: 30.0),
+              onChanged: (String value) {
+                _controller.InputMemo(value);
+              },
+              maxLines: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red, // background
+                    foregroundColor: Colors.white, // foreground
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await _controller.AddMemo();
-                      Navigator.pushNamed(context, '/');
-                    },
-                    child: Text(
-                      '保存',
-                      style: TextStyle(fontSize: 32.0, color: Colors.white),
-                    ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/');
+                  },
+                  child: Text(
+                    '破棄',
+                    style: TextStyle(fontSize: 32.0, color: Colors.white),
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await _controller.AddMemo();
+                    Navigator.pushNamed(context, '/');
+                  },
+                  child: Text(
+                    '保存',
+                    style: TextStyle(fontSize: 32.0, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

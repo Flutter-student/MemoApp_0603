@@ -36,12 +36,12 @@ class AddNotifier extends StateNotifier<AddState> {
       state = AddStateInitializing(title: state.title, memo: state.memo);
 
       var result =
-          await _databaseController.AddMemoDatabase(state.title!, state.memo!);
+          await _databaseController.addMemoDatabase(state.title!, state.memo!);
 
       if (result) {
-        print("OK");
+        print("【DB追加完了】");
       } else {
-        print("NO");
+        print("【DB追加失敗】");
       }
     } on Exception catch (e) {
       error = e;
