@@ -9,22 +9,29 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
   //DBを開く（なければ作成する）
   //############################################
   @override
-  Future<void> getDatabase() async {
+  Future<List<Map<String, Object?>>?> getDatabase() async {
     Exception? error;
     try {
+      print("######DB接続開始######");
       await getDbPath();
       final _db = await openDatabase(_path, version: _databaseVersion,
           onCreate: (Database database, int version) async {
         await database.execute(_createDatabaseQuery);
       });
+      print("######DB接続完了######");
       _database = _db;
     } on Exception catch (e) {
       error = e;
       print("エラー発生：${error}");
     }
     // Console
+    print("-----データベース-----");
     var _table = await _database.query(_tableName);
-    _table.forEach(print);
+    _table.forEach((element) {
+      print("DB内:${element}");
+    });
+    print("====================");
+    return _table;
   }
 
   //############################################
@@ -34,17 +41,20 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
   Future<void> getDbPath() async {
     Exception? error;
     try {
+      print("######Path取得開始######");
       final _dbDirectory = await getApplicationSupportDirectory();
       final _dbFilePath = _dbDirectory.path;
       final _rootPath = join(_dbFilePath, _databaseName);
+      print("######Path取得完了######");
       _path = _rootPath;
     } on Exception catch (e) {
       error = e;
       print("エラー発生：${error}");
     }
-
     // Console
+    print("-----データベース-----");
     print("FilePath:" + _path);
+    print("====================");
   }
   // 初期化完了
   //------------------------------------------------------------
@@ -55,12 +65,24 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
   @override
   Future<bool> insertData(Map<String, dynamic> value) async {
     Exception? error;
+    var value01 = {'title': "test01", 'memo': "shintaのテスト"};
     try {
+      print(value);
+      await getDatabase();
+      print("######データ追加開始######");
       await _database.insert(
         _tableName,
         value,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
+      print("######データ追加完了######");
+      // Console
+      print("-----データベース-----");
+      var _table = await _database.query(_tableName);
+      _table.forEach((element) {
+        print("DB内:${element}");
+      });
+      print("====================");
     } on Exception catch (e) {
       error = e;
       print("エラー発生：${error}");
@@ -72,22 +94,40 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
     }
   }
 
+  //############################################
+  //データ削除
+  //############################################
   @override
   Future<void> deleteData(int id) async {
-    await _database.delete(
-      _tableName,
-      where: "id = ?",
-      whereArgs: [id],
-    );
+    Exception? error;
+    try {
+      print("######データ削除開始######");
+      await _database.delete(
+        _tableName,
+        where: "id = ?",
+        whereArgs: [id],
+      );
+      print("######データ削除完了######");
+      // Console
+      print("-----データベース-----");
+      var _table = await _database.query(_tableName);
+      _table.forEach((element) {
+        print("DB内:${element}");
+      });
+      print("====================");
+    } on Exception catch (e) {
+      error = e;
+      print("エラー発生：${error}");
+    }
   }
 }
 
 class _DatabaseInfo {
-  final String _databaseName = "MemoApp.db";
+  final String _databaseName = 'MemoApp.db';
   final int _databaseVersion = 1;
-  final String _tableName = "memo_table";
+  final String _tableName = 'memo_master';
   final String _createDatabaseQuery =
-      'CREATE TABLE memo_table (id INT PRIMARY KEY NOT NULL,title VARCHAR(255),memo TEXT);';
+      'CREATE TABLE memo_master (title VARCHAR(255),memo TEXT);';
 
   /// 取得DB情報保持
   late final Database _database;

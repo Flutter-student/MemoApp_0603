@@ -8,6 +8,7 @@ class Edit_Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+<<<<<<< HEAD
     return MaterialApp(
       title: 'Flutter Memo',
       home: Scaffold(
@@ -50,20 +51,57 @@ class Edit_Screen extends ConsumerWidget {
                       '削除',
                       style: TextStyle(fontSize: 32.0, color: Colors.white),
                     ),
+=======
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('編集'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Text(
+              'Title',
+              style: TextStyle(fontSize: 30.0),
+            ),
+            TextField(
+              controller: _controller_title,
+              style: TextStyle(fontSize: 30.0),
+            ),
+            Text(
+              'Memo',
+              style: TextStyle(fontSize: 30.0),
+            ),
+            TextField(
+              controller: _controller_Memo,
+              style: TextStyle(fontSize: 30.0),
+              maxLines: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/');
+                  },
+                  child: Text(
+                    '削除',
+                    style: TextStyle(fontSize: 32.0, color: Colors.white),
+>>>>>>> v1/shinta/ui
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/');
-                    },
-                    child: Text(
-                      '保存',
-                      style: TextStyle(fontSize: 32.0, color: Colors.white),
-                    ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/');
+                  },
+                  child: Text(
+                    '保存',
+                    style: TextStyle(fontSize: 32.0, color: Colors.white),
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

@@ -19,7 +19,11 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.read(databaseProvider.notifier);
-    // _controller.connectionDatabase();
+    //##################################################################################
+    // Widget作成中にstateが変更すると再描画を無限ループしてしまい、エラーになるのでコールバックを用いている
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _controller.connectionDatabase());
+    //##################################################################################
     return MaterialApp(
       initialRoute: '/',
       theme: ThemeData(
