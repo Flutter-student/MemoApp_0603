@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memo_app/view_model/add/add_service.dart';
 
 class Add_Screen extends ConsumerWidget {
   const Add_Screen({super.key});
@@ -8,6 +9,7 @@ class Add_Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _controller = ref.read(AddProvider.notifier);
     return MaterialApp(
       title: 'Flutter Memo',
       home: Scaffold(
@@ -25,6 +27,9 @@ class Add_Screen extends ConsumerWidget {
               TextField(
                 controller: _controller_title,
                 style: TextStyle(fontSize: 30.0),
+                onChanged: (String value) {
+                  _controller.InputTitle(value);
+                },
               ),
               Text(
                 'Memo',
@@ -33,12 +38,19 @@ class Add_Screen extends ConsumerWidget {
               TextField(
                 controller: _controller_Memo,
                 style: TextStyle(fontSize: 30.0),
+                onChanged: (String value) {
+                  _controller.InputMemo(value);
+                },
                 maxLines: 5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red, // background
+                      foregroundColor: Colors.white, // foreground
+                    ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/');
                     },
@@ -48,7 +60,8 @@ class Add_Screen extends ConsumerWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await _controller.AddMemo();
                       Navigator.pushNamed(context, '/');
                     },
                     child: Text(
