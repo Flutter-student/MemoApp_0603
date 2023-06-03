@@ -72,9 +72,10 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
     }
   }
 
-  Future<void> deleteNote(int id) async {
+  @override
+  Future<void> deleteData(int id) async {
     await _database.delete(
-      'note',
+      _tableName,
       where: "id = ?",
       whereArgs: [id],
     );
@@ -99,4 +100,5 @@ abstract class _DatabaseInterfase {
   Future<void> getDatabase();
   Future<void> getDbPath();
   Future<bool> insertData(Map<String, dynamic> value);
+  Future<void> deleteData(int id);
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Add_Screen extends StatelessWidget {
+class Add_Screen extends ConsumerWidget {
   const Add_Screen({super.key});
-  static final _controller_title= TextEditingController();
-  static final _controller_Memo= TextEditingController();
+  static final _controller_title = TextEditingController();
+  static final _controller_Memo = TextEditingController();
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Flutter Memo',
       home: Scaffold(
@@ -37,9 +37,9 @@ class Add_Screen extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:[
+                children: [
                   ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.pushNamed(context, '/');
                     },
                     child: Text(
@@ -48,7 +48,7 @@ class Add_Screen extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.pushNamed(context, '/');
                     },
                     child: Text(
@@ -64,8 +64,8 @@ class Add_Screen extends StatelessWidget {
       ),
     );
   }
-  
-  void ShowAlert(){
+
+  void ShowAlert() {
     //showDialog(context: context, builder:
   }
 }

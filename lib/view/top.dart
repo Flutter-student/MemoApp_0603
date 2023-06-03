@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Top_Screen extends StatelessWidget {
+class Top_Screen extends ConsumerWidget {
   const Top_Screen({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Flutter Memo',
       home: Scaffold(
@@ -16,9 +16,9 @@ class Top_Screen extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              for(var i=0; i<3; i++)...{
+              for (var i = 0; i < 3; i++) ...{
                 ElevatedButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pushNamed(context, '/disp');
                   },
                   child: Text(
@@ -31,10 +31,10 @@ class Top_Screen extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.pushNamed(context, '/add');
           },
-          child: Icon (Icons.add),
+          child: Icon(Icons.add),
         ),
       ),
     );
