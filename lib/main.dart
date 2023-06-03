@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-import 'view/top.dart';
-import 'view/disp.dart';
-import 'view/add.dart';
-import 'view/edit.dart';
-void main() async{
-  runApp(const MyApp());
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memo_app/model/Database/memo_app_database.dart';
+import 'package:memo_app/model/repository/database_service.dart';
+import 'package:memo_app/view/add.dart';
+import 'package:memo_app/view/disp.dart';
+import 'package:memo_app/view/edit.dart';
+import 'package:memo_app/view/top.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _controller = ref.read(databaseProvider.notifier);
+    _controller.connectionDatabase();
     return MaterialApp(
-      //ここ追加
-      //意味は最初のルートパス（画面遷移先）を'/'にします。
-      initialRoute: '/',
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
