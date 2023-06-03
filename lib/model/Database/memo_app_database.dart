@@ -71,6 +71,14 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
       return false;
     }
   }
+
+  Future<void> deleteNote(int id) async {
+    await _database.delete(
+      'note',
+      where: "id = ?",
+      whereArgs: [id],
+    );
+  }
 }
 
 class _DatabaseInfo {

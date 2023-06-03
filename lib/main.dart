@@ -19,8 +19,9 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.read(databaseProvider.notifier);
-    _controller.connectionDatabase();
+    // _controller.connectionDatabase();
     return MaterialApp(
+      initialRoute: '/',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

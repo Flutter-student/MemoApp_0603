@@ -14,7 +14,7 @@ class DatabaseNotifier extends StateNotifier<DatabaseState> {
   Future<void> connectionDatabase() async {
     Exception? error;
     try {
-      this.state = DatabaseStateInitializing(memoList: state.memoList);
+      state = DatabaseStateInitializing(memoList: state.memoList);
 
       await MemoAppDatabase().getDatabase();
     } on Exception catch (e) {
