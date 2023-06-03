@@ -75,6 +75,9 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
         value,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
+
+      await Future.delayed(Duration(seconds: 1));
+
       print("######データ追加完了######");
       // Console
       print("-----データベース-----");

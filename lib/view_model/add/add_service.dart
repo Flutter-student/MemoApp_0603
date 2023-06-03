@@ -32,7 +32,7 @@ class AddNotifier extends StateNotifier<AddState> {
       if (state.title == null || state.memo == null) {
         return;
       }
-      // 初期化中状態
+      // 初期化中
       state = AddStateInitializing(title: state.title, memo: state.memo);
 
       var result =
@@ -43,6 +43,8 @@ class AddNotifier extends StateNotifier<AddState> {
       } else {
         print("【DB追加失敗】");
       }
+      // 初期化完了
+      state = AddStateInitialized();
     } on Exception catch (e) {
       error = e;
       print("エラー発生：${error}");
