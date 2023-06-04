@@ -11,9 +11,7 @@ class Top_Screen extends ConsumerWidget {
     final _controller = ref.read(TopProvider.notifier);
     final _state = ref.watch(databaseProvider).memoList;
 
-    return MaterialApp(
-      title: 'Flutter Memo',
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: Text('メモアプリ'),
@@ -32,7 +30,7 @@ class Top_Screen extends ConsumerWidget {
                     padding: EdgeInsets.only(top: 20.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        _controller.NavigationDisp(0, _state[0]);
+                        _controller.NavigationDisp(index, _state[index]);
                         Navigator.pushNamed(context, '/disp');
                       },
                       child: Padding(
@@ -55,7 +53,6 @@ class Top_Screen extends ConsumerWidget {
           },
           child: Icon(Icons.add),
         ),
-      ),
     );
   }
 }

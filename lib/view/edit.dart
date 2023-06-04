@@ -4,7 +4,6 @@ import 'package:memo_app/view_model/edit/edit_service.dart';
 
 class Edit_Screen extends ConsumerWidget {
   const Edit_Screen({super.key});
-  static final _controller_title = TextEditingController(text: 'タイトル初期値');
   static final _controller_Memo = TextEditingController(text: 'メモ初期値');
 
   @override
@@ -25,7 +24,8 @@ class Edit_Screen extends ConsumerWidget {
               style: TextStyle(fontSize: 30.0),
             ),
             TextField(
-              controller: _controller_title,
+              controller: TextEditingController(
+                  text: '${_state.memo.title'} ),
               style: TextStyle(fontSize: 30.0),
               onChanged: (String value) {
                 _controller.InputTitle(value);

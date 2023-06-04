@@ -31,11 +31,11 @@ class Disp_Screen extends ConsumerWidget {
             alignment: Alignment.centerRight,
           ),
           Text(
-            'Memo_Title',
+            _state.memo == null ? '' : '${_state.memo!.title}',
             style: TextStyle(fontSize: 30.0),
           ),
           Text(
-            'Memo_Value',
+            _state.memo == null ? '' : '${_state.memo!.memo}',
             style: TextStyle(fontSize: 30.0),
           ),
         ],
