@@ -25,7 +25,7 @@ class Edit_Screen extends ConsumerWidget {
             ),
             TextField(
               controller: TextEditingController(
-                  text: '${_state.memo.title'} ),
+                  text: '${_state.memo!.title}' ),
               style: TextStyle(fontSize: 30.0),
               onChanged: (String value) {
                 _controller.InputTitle(value);
