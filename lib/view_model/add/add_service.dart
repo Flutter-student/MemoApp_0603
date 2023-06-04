@@ -44,7 +44,7 @@ class AddNotifier extends StateNotifier<AddState> {
         print("【DB追加失敗】");
       }
       // 初期化完了
-      state = AddStateInitialized();
+      state = AddStateInitialized(title: null, memo: null);
     } on Exception catch (e) {
       error = e;
       print("エラー発生：${error}");

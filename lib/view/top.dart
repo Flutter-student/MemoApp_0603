@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memo_app/model/repository/database_service.dart';
 
 class Top_Screen extends ConsumerWidget {
   const Top_Screen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _state = ref.watch(databaseProvider).memoList;
     return MaterialApp(
       title: 'Flutter Memo',
       home: Scaffold(
