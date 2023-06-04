@@ -10,6 +10,7 @@ class Top_Screen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.read(TopProvider.notifier);
     final _state = ref.watch(databaseProvider).memoList;
+
     return MaterialApp(
       title: 'Flutter Memo',
       home: Scaffold(
@@ -20,21 +21,31 @@ class Top_Screen extends ConsumerWidget {
         body: Center(
           child: Column(
             children: [
-              for (var i = 0; i < 3; i++) ...{
-                Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _controller.NavigationDisp(0, _state![0]);
-                      Navigator.pushNamed(context, '/disp');
-                    },
-                    child: Text(
-                      'This is Test',
-                      style: TextStyle(fontSize: 32.0, color: Colors.white),
+              _state == null ?
+              Container() :
+              ListView.builder(
+                //routes: appRoutes,
+                shrinkWrap: true,
+                itemCount: _state.length,
+                itemBuilder: (context, int index){
+                  return Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _controller.NavigationDisp(0, _state[0]);
+                        Navigator.pushNamed(context, '/disp');
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          '${_state[index].title}',
+                          style: TextStyle(fontSize: 32.0, color: Colors.white),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              },
+                  );
+                },
+              ),
             ],
           ),
         ),
