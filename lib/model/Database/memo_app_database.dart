@@ -20,6 +20,8 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
       });
       print("######DB接続完了######");
       _database = _db;
+
+      // deleteDatabase(_path);
     } on Exception catch (e) {
       error = e;
       print("エラー発生：${error}");
@@ -65,9 +67,7 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
   @override
   Future<bool> insertData(Map<String, dynamic> value) async {
     Exception? error;
-    var value01 = {'title': "test01", 'memo': "shintaのテスト"};
     try {
-      print(value);
       await getDatabase();
       print("######データ追加開始######");
       await _database.insert(
@@ -79,6 +79,42 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
       await Future.delayed(Duration(seconds: 1));
 
       print("######データ追加完了######");
+      // Console
+      print("-----データベース-----");
+      var _table = await _database.query(_tableName);
+      _table.forEach((element) {
+        print("DB内:${element}");
+      });
+      print("====================");
+    } on Exception catch (e) {
+      error = e;
+      print("エラー発生：${error}");
+    } finally {
+      if (error == null) {
+        return true;
+      }
+      return false;
+    }
+  }
+
+  //############################################
+  //データ更新
+  //############################################
+  Future<bool> updateMemo(Map<String, dynamic> value) async {
+    Exception? error;
+    try {
+      await getDatabase();
+      print("######データ更新開始######");
+      await _database.update(
+        _tableName,
+        value,
+        where: "id = ${value['id']}",
+        conflictAlgorithm: ConflictAlgorithm.fail,
+      );
+
+      await Future.delayed(Duration(seconds: 1));
+
+      print("######データ更新完了######");
       // Console
       print("-----データベース-----");
       var _table = await _database.query(_tableName);
@@ -130,7 +166,7 @@ class _DatabaseInfo {
   final int _databaseVersion = 1;
   final String _tableName = 'memo_master';
   final String _createDatabaseQuery =
-      'CREATE TABLE memo_master (title VARCHAR(255),memo TEXT);';
+      'CREATE TABLE memo_master (id INTEGER PRIMARY KEY AUTOINCREMENT,title VARCHAR(255),memo TEXT);';
 
   /// 取得DB情報保持
   late final Database _database;

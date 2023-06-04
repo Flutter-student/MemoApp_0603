@@ -1,35 +1,74 @@
 import 'package:memo_app/model/memo_model.dart';
 
 class EditState {
-  final List<MomoModel>? memoList;
+  final int? number;
+  final MomoModel? memo;
+  final String? newTitle;
+  final String? newMemo;
   EditState({
-    required this.memoList,
+    required this.number,
+    required this.memo,
+    this.newTitle,
+    this.newMemo,
   });
 }
 
 class EditStateInitialize extends EditState {
   EditStateInitialize({
-    memoList,
-  }) : super(memoList: memoList);
+    number,
+    memo,
+    newTitle,
+    newMemo,
+  }) : super(number: number, memo: memo, newTitle: newTitle, newMemo: newMemo);
 
   @override
   String toString() => "初期化";
 }
 
-class DispStateInitializing extends EditState {
-  DispStateInitializing({
-    memoList,
-  }) : super(memoList: memoList);
+class EditStateInitializing extends EditState {
+  EditStateInitializing({
+    number,
+    memo,
+    newTitle,
+    newMemo,
+  }) : super(number: number, memo: memo, newTitle: newTitle, newMemo: newMemo);
 
   @override
   String toString() => "初期中";
 }
 
-class DispStateInitialized extends EditState {
-  DispStateInitialized({
-    memoList,
-  }) : super(memoList: memoList);
+class EditStateInitialized extends EditState {
+  EditStateInitialized({
+    number,
+    memo,
+    newTitle,
+    newMemo,
+  }) : super(number: number, memo: memo, newTitle: newTitle, newMemo: newMemo);
 
   @override
   String toString() => "初期完了";
+}
+
+class InputingTitle extends EditState {
+  InputingTitle({
+    number,
+    memo,
+    newTitle,
+    newMemo,
+  }) : super(number: number, memo: memo, newTitle: newTitle, newMemo: newMemo);
+
+  @override
+  String toString() => "タイトル入力中";
+}
+
+class InputingMemo extends EditState {
+  InputingMemo({
+    number,
+    memo,
+    newTitle,
+    newMemo,
+  }) : super(number: number, memo: memo, newTitle: newTitle, newMemo: newMemo);
+
+  @override
+  String toString() => "メモ入力中";
 }

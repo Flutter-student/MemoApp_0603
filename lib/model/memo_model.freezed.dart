@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MomoModel {
+  int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get memo => throw _privateConstructorUsedError;
 
@@ -29,7 +30,7 @@ abstract class $MomoModelCopyWith<$Res> {
   factory $MomoModelCopyWith(MomoModel value, $Res Function(MomoModel) then) =
       _$MomoModelCopyWithImpl<$Res, MomoModel>;
   @useResult
-  $Res call({String title, String memo});
+  $Res call({int id, String title, String memo});
 }
 
 /// @nodoc
@@ -45,10 +46,15 @@ class _$MomoModelCopyWithImpl<$Res, $Val extends MomoModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? memo = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -68,7 +74,7 @@ abstract class _$$_MomoModelCopyWith<$Res> implements $MomoModelCopyWith<$Res> {
       __$$_MomoModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String memo});
+  $Res call({int id, String title, String memo});
 }
 
 /// @nodoc
@@ -82,10 +88,15 @@ class __$$_MomoModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? memo = null,
   }) {
     return _then(_$_MomoModel(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -101,8 +112,10 @@ class __$$_MomoModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MomoModel implements _MomoModel {
-  _$_MomoModel({required this.title, required this.memo});
+  _$_MomoModel({required this.id, required this.title, required this.memo});
 
+  @override
+  final int id;
   @override
   final String title;
   @override
@@ -110,7 +123,7 @@ class _$_MomoModel implements _MomoModel {
 
   @override
   String toString() {
-    return 'MomoModel(title: $title, memo: $memo)';
+    return 'MomoModel(id: $id, title: $title, memo: $memo)';
   }
 
   @override
@@ -118,12 +131,13 @@ class _$_MomoModel implements _MomoModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MomoModel &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.memo, memo) || other.memo == memo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, memo);
+  int get hashCode => Object.hash(runtimeType, id, title, memo);
 
   @JsonKey(ignore: true)
   @override
@@ -134,8 +148,12 @@ class _$_MomoModel implements _MomoModel {
 
 abstract class _MomoModel implements MomoModel {
   factory _MomoModel(
-      {required final String title, required final String memo}) = _$_MomoModel;
+      {required final int id,
+      required final String title,
+      required final String memo}) = _$_MomoModel;
 
+  @override
+  int get id;
   @override
   String get title;
   @override

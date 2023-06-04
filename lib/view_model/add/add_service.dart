@@ -13,8 +13,6 @@ class AddNotifier extends StateNotifier<AddState> {
   Ref ref;
   AddNotifier(this.ref) : super(AddStateInitialize());
 
-  // late
-
   Future<void> InputTitle(String value) async {
     state = InputingTitle(title: value, memo: state.memo);
     print(state.title);

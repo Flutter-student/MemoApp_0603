@@ -1,16 +1,19 @@
 import 'package:memo_app/model/memo_model.dart';
 
 class DispState {
-  final List<MomoModel>? memoList;
+  final int? number;
+  final MomoModel? memo;
   DispState({
-    required this.memoList,
+    required this.number,
+    required this.memo,
   });
 }
 
 class DispStateInitialize extends DispState {
   DispStateInitialize({
-    memoList,
-  }) : super(memoList: memoList);
+    number,
+    memo,
+  }) : super(number: number, memo: memo);
 
   @override
   String toString() => "初期化";
@@ -18,8 +21,9 @@ class DispStateInitialize extends DispState {
 
 class DispStateInitializing extends DispState {
   DispStateInitializing({
-    memoList,
-  }) : super(memoList: memoList);
+    number,
+    memo,
+  }) : super(number: number, memo: memo);
 
   @override
   String toString() => "初期中";
@@ -27,8 +31,9 @@ class DispStateInitializing extends DispState {
 
 class DispStateInitialized extends DispState {
   DispStateInitialized({
-    memoList,
-  }) : super(memoList: memoList);
+    number,
+    memo,
+  }) : super(number: number, memo: memo);
 
   @override
   String toString() => "初期完了";

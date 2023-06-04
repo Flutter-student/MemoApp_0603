@@ -5,6 +5,7 @@ part 'memo_model.freezed.dart';
 @freezed
 class MomoModel with _$MomoModel {
   factory MomoModel({
+    required int id,
     required String title,
     required String memo,
   }) = _MomoModel;

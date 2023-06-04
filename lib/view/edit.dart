@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memo_app/view_model/edit/edit_service.dart';
 
 class Edit_Screen extends ConsumerWidget {
   const Edit_Screen({super.key});
@@ -8,6 +9,9 @@ class Edit_Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _controller = ref.read(EditProvider.notifier);
+    final _state = ref.watch(EditProvider);
+    print(_state.memo);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -23,6 +27,9 @@ class Edit_Screen extends ConsumerWidget {
             TextField(
               controller: _controller_title,
               style: TextStyle(fontSize: 30.0),
+              onChanged: (String value) {
+                _controller.InputTitle(value);
+              },
             ),
             Text(
               'Memo',
@@ -31,6 +38,9 @@ class Edit_Screen extends ConsumerWidget {
             TextField(
               controller: _controller_Memo,
               style: TextStyle(fontSize: 30.0),
+              onChanged: (String value) {
+                _controller.InputMemo(value);
+              },
               maxLines: 5,
             ),
             Row(
@@ -47,6 +57,7 @@ class Edit_Screen extends ConsumerWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    _controller.UpdateMemo();
                     Navigator.pushNamed(context, '/');
                   },
                   child: Text(
