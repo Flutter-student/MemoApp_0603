@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memo_app/model/Database/memo_app_database.dart';
 import 'package:memo_app/model/memo_model.dart';
@@ -41,6 +42,33 @@ class EditNotifier extends StateNotifier<EditState> {
 
       var result = await _databaseController.updateMemoDatabase(
           state.memo!.id, state.newTitle!, state.newMemo!);
+
+      if (result) {
+        print("【DB更新完了】");
+      } else {
+        print("【DB更新失敗】");
+      }
+      // 初期化完了
+      state = EditStateInitialized(
+          number: null, memo: null, newTitle: null, newMemo: null);
+    } on Exception catch (e) {
+      error = e;
+      print("エラー発生：${error}");
+    }
+  }
+
+  Future<void> DeleteMemo() async {
+    DatabaseNotifier _databaseController = ref.read(databaseProvider.notifier);
+    Exception? error;
+    try {
+      //初期化中
+      state = EditStateInitializing(
+          number: state.number,
+          memo: state.memo,
+          newTitle: state.newTitle,
+          newMemo: state.newMemo);
+
+      var result = await _databaseController.deleteMemoDatabase(state.memo!.id);
 
       if (result) {
         print("【DB更新完了】");

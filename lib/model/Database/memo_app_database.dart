@@ -137,9 +137,10 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
   //データ削除
   //############################################
   @override
-  Future<void> deleteData(int id) async {
+  Future<bool> deleteData(int id) async {
     Exception? error;
     try {
+      await getDatabase();
       print("######データ削除開始######");
       await _database.delete(
         _tableName,
@@ -157,6 +158,11 @@ class MemoAppDatabase extends _DatabaseInfo implements _DatabaseInterfase {
     } on Exception catch (e) {
       error = e;
       print("エラー発生：${error}");
+    } finally {
+      if (error == null) {
+        return true;
+      }
+      return false;
     }
   }
 }

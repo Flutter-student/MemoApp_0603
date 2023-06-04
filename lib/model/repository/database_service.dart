@@ -106,6 +106,31 @@ class DatabaseNotifier extends StateNotifier<DatabaseState> {
     }
   }
 
+  Future<bool> deleteMemoDatabase(int id) async {
+    Exception? error;
+    bool result = false;
+    try {
+      //初期化中
+      state = DatabaseStateInitializing(memoList: state.memoList);
+
+      int memo_daital = id;
+
+      result = await MemoAppDatabase().deleteData(memo_daital);
+
+      await refreshStateData();
+
+      //初期化完了
+      state = DatabaseStateInitialized(memoList: state.memoList);
+    } on Exception catch (e) {
+      error = e;
+    } finally {
+      if (error != null) {
+        throw error;
+      }
+      return result;
+    }
+  }
+
   Future<void> refreshStateData() async {
     Exception? error;
     try {
