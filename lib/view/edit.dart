@@ -61,7 +61,7 @@ class Edit_Screen extends ConsumerWidget {
                       _controller.DeleteMemo();
                       _controller_title.clear();
                       _controller_Memo.clear();
-                      Navigator.pushNamed(context, '/');
+                      Navigator.popUntil(context, (route) => route.isFirst);
                     },
                     child: Text(
                       '削除',
@@ -73,7 +73,7 @@ class Edit_Screen extends ConsumerWidget {
                       _controller.UpdateMemo();
                       _controller_title.clear();
                       _controller_Memo.clear();
-                      Navigator.pushNamed(context, '/');
+                      Navigator.popUntil(context, (route) => route.isFirst);
                     },
                     child: Text(
                       '保存',

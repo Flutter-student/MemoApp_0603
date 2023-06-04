@@ -13,6 +13,7 @@ class Top_Screen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text('メモアプリ'),
       ),

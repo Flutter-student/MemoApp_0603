@@ -12,20 +12,20 @@ class Add_Screen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _controller = ref.read(AddProvider.notifier);
     final _state = ref.watch(AddProvider);
-    return _state is AddStateInitializing
-        ? CircularProgressIndicator()
-        : WillPopScope(
-            onWillPop: () async {
-              _controller_title.clear();
-              _controller_Memo.clear();
-              return true;
-            },
-            child: Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                title: Text('追加'),
-              ),
-              body: Center(
+    return WillPopScope(
+      onWillPop: () async {
+        _controller_title.clear();
+        _controller_Memo.clear();
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('追加'),
+        ),
+        body: _state is AddStateInitializing
+            ? Center(child: CircularProgressIndicator())
+            : Center(
                 child: Column(
                   children: [
                     Text(
@@ -60,7 +60,8 @@ class Add_Screen extends ConsumerWidget {
                             foregroundColor: Colors.white, // foreground
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/');
+                            Navigator.popUntil(
+                                context, (route) => route.isFirst);
                           },
                           child: Text(
                             '破棄',
@@ -73,7 +74,8 @@ class Add_Screen extends ConsumerWidget {
                             await _controller.AddMemo();
                             _controller_title.clear();
                             _controller_Memo.clear();
-                            Navigator.pushNamed(context, '/');
+                            Navigator.popUntil(
+                                context, (route) => route.isFirst);
                           },
                           child: Text(
                             '保存',
@@ -86,8 +88,8 @@ class Add_Screen extends ConsumerWidget {
                   ],
                 ),
               ),
-            ),
-          );
+      ),
+    );
   }
 }
 
